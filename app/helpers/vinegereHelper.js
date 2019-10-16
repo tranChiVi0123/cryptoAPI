@@ -1,5 +1,3 @@
-import { model } from "mongoose";
-
 const lowerReference = 'abcdefghijklmnopqrstuvwxyz';
 const upperReference = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
@@ -74,5 +72,4 @@ function cipher(w, p) {
 function decipher(w, p) {
     return process(w, p, -1);
 }
-
-module.exports(cipher,decipher);
+module.exports = { cipher, decipher };
