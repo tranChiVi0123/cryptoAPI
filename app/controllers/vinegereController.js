@@ -10,6 +10,3 @@ exports.encryption = function (req, res) {
     }
     res.send({ message: resuilt });
 }
-exports.decryption = function (req, res) {
-
-}
