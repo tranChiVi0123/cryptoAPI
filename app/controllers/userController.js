@@ -38,10 +38,10 @@ module.exports = {
             res.status(500).send(error)
         }
     },
-    view: async (req, res, next) => {
+    view: async (req, res, next) => {//R
         res.send(req.body);
     },
-    new: async (req, res, next) => {
+    new: async (req, res, next) => {//C
         // Create a new user
         try {
             const user = new User(req.body)

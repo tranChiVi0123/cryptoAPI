@@ -4,7 +4,7 @@ const vinegereController = require('../app/controllers/vinegereController');
 
 router.post('/',vinegereController.encryption);
 router.get('/',(req,res)=>{
-    res.send('OK');
+    res.render('vinegere', { title: 'Vinegere' });
 });
 
 module.exports = router;

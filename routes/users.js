@@ -9,7 +9,7 @@ router.get('/me', auth, userControler.view);
 
 router.post('/me/logout/', auth, userControler.logout);
 
-router.post('/me/logoutall',auth, userControler.logoutall);
+router.post('/me/logoutall', auth, userControler.logoutall);
 
 router.post('/login', userControler.login);
 
