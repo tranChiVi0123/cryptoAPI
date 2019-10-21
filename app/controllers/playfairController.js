@@ -7,5 +7,5 @@ exports.PlayfairControl = function(req,res){
      let flag = req.body.flag;
      let isDecrypt = (flag==0);
      let resuilt = process(message,key,isDecrypt);
-     res.send({result:{resuilt}});
+     res.json(resuilt);
 }

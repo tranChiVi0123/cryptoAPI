@@ -8,5 +8,5 @@ exports.encryption = function (req, res) {
     }else{
         var resuilt = decipher(key, pri);
     }
-    res.send({ message: resuilt });
+    res.json(resuilt);
 }
