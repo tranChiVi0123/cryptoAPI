@@ -15,6 +15,7 @@ module.exports = {
         var posts = Post.find().then(resuilt => {
             res.status(201).json(resuilt);
         }).catch(err => {
+            console.log(err);
             res.status(400).json(err);
         })
     },
