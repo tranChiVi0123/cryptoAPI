@@ -8,13 +8,13 @@ const auth = async (req, res, next) => {
     try {
         let user = await User.findOne({ _id: data._id, 'tokens.token': token });
         if (!user) {
-            throw new Error()
+            return res.status(404).send({result:"Can't find user id."});
         }
         req.user = user;
         req.token = token;
         next();
     } catch (err) {
-        res.status(401).send({ error: 'Not authorrized to access this resource' });
+        res.status(401).send({ result: 'Not authorrized to access this resource' });
     }
 }
 module.exports = auth;

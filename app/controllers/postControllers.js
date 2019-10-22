@@ -4,19 +4,20 @@ module.exports = {
     new: async (req, res, next) => {//C
         console.log(req.body);
         var post = new Post(req.body);
-        await post.save().then(resuilt => {
-            res.status(201).json(resuilt);
+        await post.save().then(result => {
+            res.status(201).send({ result: "OK" });
         }).catch(err => {
-            res.status(400).send(err);
+            console.log(err);
+            res.status(400).send({ result: "Error" });
         })
 
     },
     view: (req, res, next) => {//R
-        var posts = Post.find().then(resuilt => {
-            res.status(201).json(resuilt);
+        var posts = Post.find().then(result => {
+            res.status(201).json(result);
         }).catch(err => {
             console.log(err);
-            res.status(400).json(err);
+            res.status(400).send({ result: "Error" });
         })
     },
     update: async (req, res, next) => {//U
@@ -27,19 +28,20 @@ module.exports = {
             },
             {
                 new: true
-            }).then(resuilt => {
-                res.json(resuilt);
+            }).then(result => {
+                res.send({ result: "OK" });
             }).catch(err => {
-                res.json(err);
+                console.log(err);
+                res.send({ result: "Error" });
             });
     },
     delete: (req, res, next) => {//D
         let id = req.params.id;
-        Post.findOneAndDelete({ _id: id }).exec().then(resuilt => {
-            if (resuilt) {
-                res.status(200).json(`Post book by id=${id}`);
+        Post.findOneAndDelete({ _id: id }).exec().then(result => {
+            if (result) {
+                res.status(200).send(`Post book by id=${id}`);
             } else {
-                res.status(404).json(`Can't find post by id=${id}`)
+                res.status(404).send(`Can't find post by id=${id}`);
             };
         });
     },
@@ -48,9 +50,10 @@ module.exports = {
         let idpost = req.body.idpost;
         await Post.findOneAndUpdate({ _id: idpost }, { $addToSet: { solvedby: iduser } }, (err, doc) => {
             if (err) {
-                return res.status(500).send("Failed");
+                console.log(err);
+                return res.status(500).send({ result: "Error" });
             }
-            return res.status(201).send("Successful!");
+            return res.status(201).send({ result: "OK" });
         });
 
     }

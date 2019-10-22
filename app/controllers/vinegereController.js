@@ -4,9 +4,9 @@ exports.encryption = function (req, res) {
     let pri = req.body.text;
     let flag = req.body.flag;
     if(flag==0){
-        var resuilt = cipher(key, pri);
+        var result = cipher(key, pri);
     }else{
-        var resuilt = decipher(key, pri);
+        var result = decipher(key, pri);
     }
-    res.json(resuilt);
+    res.json(result);
 }

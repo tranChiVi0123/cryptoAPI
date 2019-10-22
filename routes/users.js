@@ -3,9 +3,9 @@ var router = express.Router();
 var userControler = require('../app/controllers/userController');
 var auth = require('../app/middleware/auth');
 /* GET users listing. */
-router.get('/', userControler.getAll);
+router.get('/', userControler.getAll);//=>test
 
-router.get('/me', auth, userControler.view);
+router.get('/me/:id', auth, userControler.view);
 
 router.post('/me/logout/', auth, userControler.logout);
 
@@ -19,6 +19,6 @@ router.put('/me/:id', auth, userControler.update);
 
 router.delete('/me/delete/:id', auth, userControler.removeOne);
 
-router.delete('/deleteall', userControler.deleteAll);
+router.delete('/deleteall', userControler.deleteAll);//=>test
 
 module.exports = router;

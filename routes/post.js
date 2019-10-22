@@ -5,13 +5,13 @@ var auth = require('../app/middleware/auth');
 var checkAuthor = require('../app/middleware/checkAuthor');
 
 
-router.post('/', postController.new);
+router.post('/', auth, postController.new);
 
 router.get('/', postController.view);
 
 router.put('/:id', auth, checkAuthor, postController.update);
 
-router.put('/me/:id', postController.sovle);
+router.put('/me/:id', auth, postController.sovle);
 
 router.delete('/:id', auth, checkAuthor, postController.delete);
 
