@@ -66,4 +66,4 @@ UserSchema.statics.findByCredentials = async (email, password) => {
 }
 const User = mongoose.model('User', UserSchema)
 
-module.exports = User
+module.exports = User;

@@ -42,5 +42,16 @@ module.exports = {
                 res.status(404).json(`Can't find post by id=${id}`)
             };
         });
+    },
+    sovle: async (req, res, next) => {//U
+        let iduser = req.params.id;
+        let idpost = req.body.idpost;
+        await Post.findOneAndUpdate({ _id: idpost }, { $addToSet: { solvedby: iduser } }, (err, doc) => {
+            if (err) {
+                return res.status(500).send("Failed");
+            }
+            return res.status(201).send("Successful!");
+        });
+
     }
 }

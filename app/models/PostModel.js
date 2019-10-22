@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const uniqueArrayPlugin = require('mongoose-unique-array');
 
 const PostScheme = mongoose.Schema({
     plaintext: {
@@ -24,7 +25,8 @@ const PostScheme = mongoose.Schema({
     },
     description: {
         type: String,
-        require: true
+        require: true,
+        uppercase: true
     },
     caesar: {
         type: String,
@@ -41,8 +43,10 @@ const PostScheme = mongoose.Schema({
     },
     solvedby: [{
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        unique: true
     }]
 });
+PostScheme.plugin(uniqueArrayPlugin);
 const Post = mongoose.model('Post', PostScheme);
 module.exports = Post;
