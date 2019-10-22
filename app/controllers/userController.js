@@ -1,4 +1,6 @@
 const User = require('../models/UserModel');
+const Post = require('../models/PostModel');
+const bcrypt = require('bcryptjs');
 
 module.exports = {
     login: async (req, res, next) => {
@@ -7,12 +9,13 @@ module.exports = {
             const { email, password } = req.body
             const user = await User.findByCredentials(email, password)
             if (!user) {
-                return res.status(401).send({ error: 'Login failed! Check authentication credentials' })
+                return res.status(401).send('Login failed! Check authentication credentials');
             }
-            const token = await user.generateAuthToken()
-            res.send({ user, token })
+            const token = await user.generateAuthToken();
+            res.send({ user, token });
         } catch (error) {
-            res.status(400).send({ err: error })
+            console.log(error);
+            res.status(400).send("Lỗi đăng nhập!");
         }
 
     },
@@ -45,12 +48,25 @@ module.exports = {
         // Create a new user
         try {
             const user = new User(req.body)
-            await user.save()
-            const token = await user.generateAuthToken()
+            await user.save();
+            //const token = await user.generateAuthToken();
             res.status(201).send({ user, token })
         } catch (error) {
             res.status(400).send(error)
         }
+    },
+    update: async (req, res, next) => {//U
+        let id = req.params.id;
+        let $set = req.body;
+        $set.password = await bcrypt.hash($set.password,8);
+        console.log($set);
+        await User.findByIdAndUpdate({_id:id},{$set}).then(resuilt=>{
+            //console.log(resuilt);
+            res.status(201).send("Updated");
+        }).catch(err=>{
+            console.log(err);
+            res.status(404).send("failed");
+        })
     },
     getAll: (req, res, next) => { //test
         let users = User.find().then(resuilt => {
@@ -59,6 +75,15 @@ module.exports = {
             res.status(404).send({ message: err });
         })
 
+    },
+    removeOne: async (req, res, next) => {//D
+        let id = req.params.id;
+        let users = await User.findOneAndDelete({ _id: id }).exec().then(resuilt => {
+            let post = Post.findOneAndDelete({ submittedby: id }).exec();
+            res.status(201).send("Deleted");
+        }).catch(err => {
+            res.status(400).send("Failed");
+        })
     },
     deleteAll: (req, res, next) => { //test
         let users = User.remove().then(resuilt => {

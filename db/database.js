@@ -6,7 +6,7 @@ class Database {
         this.__connect();
     }
     __connect() {
-        mongoose.connect(config.mongoDb.connectionString, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }, () => console.log('Api Ready...'));
+        mongoose.connect(config.mongoDb.connectionString, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true }, () => console.log('Api Ready...'));
         mongoose.Promise = global.Promise;
     }
 }

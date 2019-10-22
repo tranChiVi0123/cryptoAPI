@@ -3,6 +3,7 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 require('dotenv/config');
+const Schema = mongoose.Schema;
 
 const UserSchema = mongoose.Schema({
     username: {
@@ -39,10 +40,11 @@ const UserSchema = mongoose.Schema({
 UserSchema.pre('save', async function (next) {
     let user = this;
     if (user.isModified('password')) {
-        user.password = await bcrypt.hash(user.password, 8)
+        //console.log("pre Save");
+        user.password = await bcrypt.hash(user.password, 8);
     }
-    next()
-})
+    next();
+});
 UserSchema.methods.generateAuthToken = async function () {
     let user = this;
     let token = jwt.sign({ _id: user._id }, process.env.JWT_KEY);
@@ -52,7 +54,7 @@ UserSchema.methods.generateAuthToken = async function () {
 }
 UserSchema.statics.findByCredentials = async (email, password) => {
     // Search for a user by email and password.
-    const user = await User.findOne({ email} )
+    const user = await User.findOne({ email })
     if (!user) {
         throw new Error({ error: 'Invalid login credentials' })
     }

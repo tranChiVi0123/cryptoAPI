@@ -37,13 +37,12 @@ const PostScheme = mongoose.Schema({
     },
     submittedon: {
         type: Date,
-        time: {
-            _updateAt: Date.now
-        }
+        default: Date.now
     },
     solvedby: [{
         type: Schema.Types.ObjectId,
         ref: 'User'
     }]
 });
-module.exports = mongoose.model('Post',PostScheme);
+const Post = mongoose.model('Post', PostScheme);
+module.exports = Post;

@@ -15,6 +15,10 @@ router.post('/login', userControler.login);
 
 router.post('/', userControler.new);
 
+router.put('/me/:id', auth, userControler.update);
+
+router.delete('/me/delete/:id', auth, userControler.removeOne);
+
 router.delete('/deleteall', userControler.deleteAll);
 
 module.exports = router;
