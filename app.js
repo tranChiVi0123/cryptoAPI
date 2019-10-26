@@ -13,9 +13,11 @@ var postRouter = require('./routes/post');
 var bookRouter = require('./routes/books');
 var vinegereRouter = require('./routes/vinegere');
 var playfairRouter = require('./routes/playfair');
+var cors = require('cors')
 
 var app = express();
 
+app.use(cors());
 // view engine setup
 app.set('views', path.join(__dirname, './app/views'));
 app.set('view engine', 'ejs');
