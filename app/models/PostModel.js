@@ -44,7 +44,6 @@ const PostScheme = mongoose.Schema({
     solvedby: [{
         type: Schema.Types.ObjectId,
         ref: 'User',
-        unique: true
     }]
 });
 PostScheme.plugin(uniqueArrayPlugin);
