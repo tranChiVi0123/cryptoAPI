@@ -13,6 +13,7 @@ var postRouter = require('./routes/post');
 var bookRouter = require('./routes/books');
 var vinegereRouter = require('./routes/vinegere');
 var playfairRouter = require('./routes/playfair');
+var caesarRouter = require('./routes/caesar');
 var cors = require('cors')
 
 var app = express();
@@ -34,6 +35,7 @@ app.use('/vinegere', vinegereRouter);
 app.use('/users', usersRouter);
 app.use('/posts',postRouter);
 app.use('/playfair',playfairRouter);
+app.use('/caesar',caesarRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const uniqueArrayPlugin = require('mongoose-unique-array');
+//const uniqueArrayPlugin = require('mongoose-unique-array');
 
 const PostScheme = mongoose.Schema({
     plaintext: {
@@ -46,6 +46,6 @@ const PostScheme = mongoose.Schema({
         ref: 'User',
     }]
 });
-PostScheme.plugin(uniqueArrayPlugin);
+//PostScheme.plugin(uniqueArrayPlugin);
 const Post = mongoose.model('Post', PostScheme);
 module.exports = Post;

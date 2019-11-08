@@ -20,6 +20,7 @@ module.exports = {
 
     },
     logout: async (req, res) => {
+        console.log(req);
         // Log user out of the application
         try {
             req.user.tokens = req.user.tokens.filter((token) => {

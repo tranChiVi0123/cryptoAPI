@@ -7,6 +7,7 @@ module.exports = {
         await post.save().then(result => {
             res.status(201).send({ result: "OK" });
         }).catch(err => {
+            console.log("Lỗi cmnr");
             console.log(err);
             res.status(400).send({ result: "Error" });
         })
