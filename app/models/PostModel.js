@@ -26,7 +26,8 @@ const PostScheme = mongoose.Schema({
     description: {
         type: String,
         require: true,
-        uppercase: true
+        uppercase: true,
+        //unique: true
     },
     caesar: {
         type: String,
