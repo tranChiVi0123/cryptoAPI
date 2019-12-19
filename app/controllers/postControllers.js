@@ -1,6 +1,4 @@
 const Post = require('../models/PostModel');
-const User = require('../models/UserModel');
-
 module.exports = {
     new: async (req, res, next) => {//C
         console.log(req.body);
