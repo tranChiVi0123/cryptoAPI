@@ -74,6 +74,33 @@ module.exports = {
             console.log(err)
         });
         ranks.sort();
-        res.send(ranks);
+        let current = "";
+        let cnt = 0;
+        let result = [];
+        for (let i = 0; i < ranks.length; i++) {
+            if (!ranks[i].equals(current)) {
+                if (cnt > 0) {
+                    result.push({
+                        key: current,
+                        value: cnt
+                    });
+                }
+                current = ranks[i];
+                cnt = 1;
+            } else {
+                cnt++;
+            }
+        }
+        if (cnt > 0) {
+            result.push({
+                key: current,
+                value: cnt
+            });
+        }
+        result.sort((a, b) => {
+            return a.value < b.value;
+        })
+        //console.log(result);
+        res.send(result);
     }
 }
