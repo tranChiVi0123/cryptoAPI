@@ -15,4 +15,5 @@ router.put('/me/:id', auth, postController.sovle);
 
 router.delete('/:id', auth, checkAuthor, postController.delete);
 
+router.get('/rank',postController.getRank);
 module.exports = router;

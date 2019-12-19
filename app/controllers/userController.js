@@ -65,7 +65,7 @@ module.exports = {
             res.status(400).send({ result: "Error" });
         }
     },
-    update: async (req, res, next) => {//U
+        update: async (req, res, next) => {//U
         let id = req.params.id;
         let $set = req.body;
         $set.password = await bcrypt.hash($set.password, 8);

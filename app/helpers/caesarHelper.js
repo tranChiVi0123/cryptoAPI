@@ -1,4 +1,3 @@
-
 function Caesar(text, key, flag) {
     anpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     console.log(anpha.length);

@@ -1,4 +1,5 @@
 const Post = require('../models/PostModel');
+const User = require('../models/UserModel');
 
 module.exports = {
     new: async (req, res, next) => {//C
@@ -56,6 +57,23 @@ module.exports = {
             }
             return res.status(201).send({ result: "OK" });
         });
-
+    },
+    getRank: async (req, res, next) => {
+        let ranks = [];
+        let posts = await Post.find().then(
+            result => {
+                result.forEach(items => {
+                    if (items != "") {
+                        items.solvedby.forEach(item => {
+                            ranks.push(item);
+                        });
+                    }
+                });
+            }
+        ).catch(err => {
+            console.log(err)
+        });
+        ranks.sort();
+        res.send(ranks);
     }
 }
