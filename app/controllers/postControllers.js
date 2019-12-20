@@ -1,4 +1,10 @@
 const Post = require('../models/PostModel');
+const User = require('../models/UserModel');
+
+var getUserNameByID = async (id) => {
+    let user = await User.findById({ _id: id });
+    return user.username;
+}
 module.exports = {
     new: async (req, res, next) => {//C
         console.log(req.body);
@@ -78,10 +84,14 @@ module.exports = {
         for (let i = 0; i < ranks.length; i++) {
             if (!ranks[i].equals(current)) {
                 if (cnt > 0) {
-                    result.push({
-                        key: current,
-                        value: cnt
-                    });
+                    await User.findById({ _id: current }).then(
+                        succ=>{
+                            result.push({
+                                key: succ.username,
+                                value: cnt
+                            });
+                        }
+                    ).catch(err=>console.log(err));
                 }
                 current = ranks[i];
                 cnt = 1;
@@ -90,10 +100,14 @@ module.exports = {
             }
         }
         if (cnt > 0) {
-            result.push({
-                key: current,
-                value: cnt
-            });
+            await User.findById({ _id: current }).then(
+                succ=>{
+                    result.push({
+                        key: succ.username,
+                        value: cnt
+                    });
+                }
+            ).catch(err=>console.log(err));
         }
         result.sort((a, b) => {
             return a.value < b.value;
