@@ -7,6 +7,8 @@ router.get('/', userControler.getAll);//=>test
 
 router.get('/me/:id', auth, userControler.view);
 
+router.get('/post/:id',auth,userControler.viewpost);
+
 router.post('/me/logout/', auth, userControler.logout);
 
 router.post('/me/logoutall', auth, userControler.logoutall);

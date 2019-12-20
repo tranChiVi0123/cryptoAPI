@@ -30,7 +30,7 @@ module.exports = {
             res.send({ result: "Goodbye!" })
         } catch (error) {
             console.log(error);
-            res.status(500).send({result:"Error"})
+            res.status(500).send({ result: "Error" })
         }
     },
     logoutall: async (req, res) => {
@@ -53,19 +53,26 @@ module.exports = {
             res.status(404).send({ result: "Not find!" })
         })
     },
+    viewpost: async (req, res, next) => {
+        console.log("hello");
+        let id = req.params.id;
+        await Post.find({submittedby:id}).then(
+            result=>res.send(result)
+        ).catch(err=>console.log(err));
+    },
     new: async (req, res, next) => {//C
         // Create a new user
         try {
             const user = new User(req.body)
             await user.save();
             //const token = await user.generateAuthToken();
-            res.status(201).send({message:"OK"});
+            res.status(201).send({ message: "OK" });
         } catch (error) {
             console.log(error);
             res.status(400).send({ result: "Error" });
         }
     },
-        update: async (req, res, next) => {//U
+    update: async (req, res, next) => {//U
         let id = req.params.id;
         let $set = req.body;
         $set.password = await bcrypt.hash($set.password, 8);

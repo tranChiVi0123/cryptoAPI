@@ -9,11 +9,11 @@ router.post('/', auth, postController.new);
 
 router.get('/', postController.view);
 
-router.put('/:id', auth, checkAuthor, postController.update);
+router.put('/:id', auth, postController.update);
 
 router.put('/me/:id', auth, postController.sovle);
 
-router.delete('/:id', auth, checkAuthor, postController.delete);
+router.delete('/:id', auth, postController.delete);
 
-router.get('/rank',postController.getRank);
+router.get('/rank', postController.getRank);
 module.exports = router;
